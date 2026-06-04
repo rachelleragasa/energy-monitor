@@ -12,6 +12,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { API_BASE_URL } from "./lib/api";
 
 interface Leitura {
   data: string;
@@ -121,7 +122,7 @@ export default function Home() {
   // setState synchronously in the effect body.
   useEffect(() => {
     if (!uploaded) return;
-    fetch("http://localhost:8000/api/leituras")
+    fetch(`${API_BASE_URL}/api/leituras`)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();

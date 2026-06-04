@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { API_BASE_URL } from "../lib/api";
 
 type Status =
   | { kind: "idle" }
@@ -35,7 +36,7 @@ export default function Upload() {
     const body = new FormData();
     body.append("file", file);
     try {
-      const r = await fetch("http://localhost:8000/api/upload", {
+      const r = await fetch(`${API_BASE_URL}/api/upload`, {
         method: "POST",
         body,
       });
