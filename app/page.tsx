@@ -122,7 +122,7 @@ export default function Home() {
   // setState synchronously in the effect body.
   useEffect(() => {
     if (!uploaded) return;
-    fetch(`${API_BASE_URL}/api/leituras`)
+    fetch(`/api/leituras`)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();
@@ -908,8 +908,8 @@ export default function Home() {
               margin: "0 auto 1.5rem",
             }}
           >
-            Para ver os gráficos e as tabelas de consumo, comece por carregar uma
-            folha de cálculo com a folha{" "}
+            Para ver os gráficos e as tabelas de consumo, comece por carregar
+            uma folha de cálculo com a folha{" "}
             <span style={{ fontFamily: "var(--font-mono)" }}>Leituras</span>.
           </div>
           <Link
