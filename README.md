@@ -1,28 +1,35 @@
 # ⚡ Energia Monitor
 
-Full-stack energy consumption dashboard — Next.js frontend + FastAPI Python backend.
+A personal Portuguese electricity-consumption dashboard ("Leituras de Energia" — Energy Readings) that reads meter data (consumption + solar injection) split across three tariff periods: Vazio (off-peak), Ponta (peak), Cheias (mid-peak).
+
+## Live Demo
+
+🔗 **[View the hosted demo](https://energy-monitor-alpha.vercel.app/)** — deployed for preview, not a production client deployment.
 
 ## Stack
 
-| Layer     | Technology                              |
-|-----------|-----------------------------------------|
-| Frontend  | Next.js 15, TypeScript, Tailwind CSS    |
-| Backend   | FastAPI (Python 3)                      |
-| Data      | pandas + openpyxl                       |
+| Layer    | Technology                           |
+| -------- | ------------------------------------ |
+| Frontend | Next.js 15, TypeScript, Tailwind CSS |
+| Backend  | FastAPI (Python 3)                   |
+| Data     | pandas + openpyxl                    |
 
 ## Quick Start
 
 ### 1. Install Python dependencies
+
 ```bash
 pip install fastapi uvicorn pandas openpyxl
 ```
 
 ### 2. Install Node dependencies
+
 ```bash
 npm install
 ```
 
 ### 3. Run everything
+
 ```bash
 chmod +x start.sh
 ./start.sh
@@ -31,22 +38,24 @@ chmod +x start.sh
 Or run separately:
 
 **Backend:**
+
 ```bash
 cd backend
 uvicorn main:app --reload --port 8000
 ```
 
 **Frontend:**
+
 ```bash
 npm run dev
 ```
 
 ## Endpoints
 
-| URL | Description |
-|-----|-------------|
-| `http://localhost:3000` | Frontend dashboard |
-| `http://localhost:8000/api/leituras` | JSON API |
+| URL                                  | Description        |
+| ------------------------------------ | ------------------ |
+| `http://localhost:3000`              | Frontend dashboard |
+| `http://localhost:8000/api/leituras` | JSON API           |
 
 ## Deployment
 
@@ -56,17 +65,16 @@ The app deploys as two pieces: the Next.js frontend (e.g. on Vercel) and the Fas
 
 Copy `.env.example` and set both to your deployed backend's public URL:
 
-| Variable | Used by | Purpose |
-|----------|---------|---------|
+| Variable      | Used by                   | Purpose                                        |
+| ------------- | ------------------------- | ---------------------------------------------- |
 | `BACKEND_URL` | `next.config.ts` rewrites | Server-side proxy target for `/api/*` requests |
-| `NEXT_PUBLIC_API_URL` | Frontend (browser) | Public backend URL exposed to the client |
 
 Locally both default to `http://localhost:8000`.
 
 ### Frontend (Vercel)
 
 1. Import the repo into Vercel — it auto-detects Next.js.
-2. Set `BACKEND_URL` and `NEXT_PUBLIC_API_URL` in the project's environment variables.
+2. Set `BACKEND_URL` in the project's environment variables.
 3. Deploy. Vercel runs `npm run build` and serves the app.
 
 Requests to `/api/:path*` are rewritten to `${BACKEND_URL}/api/:path*`, so the browser talks to the frontend origin and Next.js proxies to the backend.
@@ -88,7 +96,13 @@ The Excel file (data.xlsx) is read by the Python backend, filtered for Energia c
 
 ```json
 [
-  { "data": "01/06/2026", "vazio": 28474, "ponta": 7221, "cheias": 15747, "total": 51442 }
+  {
+    "data": "01/06/2026",
+    "vazio": 28474,
+    "ponta": 7221,
+    "cheias": 15747,
+    "total": 51442
+  }
 ]
 ```
 
