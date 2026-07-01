@@ -8,11 +8,12 @@ A personal Portuguese electricity-consumption dashboard ("Leituras de Energia" �
 
 ## Stack
 
-| Layer    | Technology                           |
-| -------- | ------------------------------------ |
-| Frontend | Next.js 15, TypeScript, Tailwind CSS |
-| Backend  | FastAPI (Python 3)                   |
-| Data     | pandas + openpyxl                    |
+| Layer    | Technology                                    |
+| -------- | --------------------------------------------- |
+| Frontend | Next.js 16, TypeScript, Tailwind CSS          |
+| Backend  | FastAPI (Python 3)                            |
+| Data     | pandas + openpyxl                             |
+| Testing  | Vitest + React Testing Library (frontend), pytest (backend) |
 
 ## Quick Start
 
@@ -48,6 +49,22 @@ uvicorn main:app --reload --port 8000
 
 ```bash
 npm run dev
+```
+
+## Testing
+
+**Frontend** — [Vitest](https://vitest.dev/) with React Testing Library (jsdom). Tests live in `__tests__/`.
+
+```bash
+npm test         # run once (used by the pre-commit hook and CI)
+npm run test:watch  # re-run on change during development
+```
+
+**Backend** — [pytest](https://docs.pytest.org/); tests live in `backend/test_main.py`.
+
+```bash
+cd backend
+pytest
 ```
 
 ## Endpoints
